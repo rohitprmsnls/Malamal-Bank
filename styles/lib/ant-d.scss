@@ -370,9 +370,27 @@
   background-color: transparent;
   border-color: #39ff14;
   color: #39ff14;
+  margin-top: 2rem;
 }
 .ant-btn-primary:hover {
   background-color: #39ff14;
   color: #000;
   border: none;
+}
+textarea.ant-input {
+  max-width: 80%;
+  height: auto;
+  min-height: 32px;
+  line-height: 1.5715;
+  vertical-align: bottom;
+  transition: all 0.3s, height 0s;
+  border-radius: 0.9375rem;
+  &::placeholder {
+    color: #000 !important;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    opacity: 0.2 !important;
+  }
 }

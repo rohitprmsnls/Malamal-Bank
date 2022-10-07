@@ -27,7 +27,7 @@
     color: #ffffff;
     text-align: center;
     width: 100%;
-    max-width: 484px;
+    // max-width: 484px;
 
     @media screen and (max-width: $mobileResolution) {
       color: #ffffff;
@@ -44,14 +44,14 @@
   }
 
   h1 {
-    color: #ffffff;
+    color: #39ff14;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
     font-size: 50px;
     margin-bottom: 4.5rem;
     @media screen and (max-width: $mobileResolution) {
-      color: #ffffff;
+      color: #39ff14;
       font-family: "Poppins";
       font-style: normal;
       font-weight: 500;

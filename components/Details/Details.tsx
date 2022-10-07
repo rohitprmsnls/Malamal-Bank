@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
+const { TextArea } = Input;
 const Details = () => {
   return (
     <div className={`${s.container}`}>
       <div className={`${s.form}`}>
-        <h1>Enter Details Here!</h1>
+        <h1>Enter Details Here</h1>
         <Form>
           <Form.Item
             name="name"
@@ -41,6 +42,41 @@ const Details = () => {
           >
             <Input placeholder="Email id" className={`${s.input_data}`} />
           </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                // message: "Enter your valid email address",
+                type: "number",
+              },
+            ]}
+          >
+            <Input
+              placeholder=" Enter Password"
+              className={`${s.input_data}`}
+            />
+          </Form.Item>
+          <Form.Item
+            name="confirm password"
+            rules={[
+              {
+                required: true,
+                // message: "Enter your valid email address",
+                type: "number",
+              },
+            ]}
+          >
+            <Input
+              placeholder="Re enter password"
+              className={`${s.input_data}`}
+            />
+          </Form.Item>
+          <TextArea
+            placeholder="Your address"
+            autoSize={{ minRows: 2, maxRows: 6 }}
+          />
+          <Button type="primary">Submit</Button>
         </Form>
       </div>
     </div>
