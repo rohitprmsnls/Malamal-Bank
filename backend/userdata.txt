@@ -1,0 +1,9 @@
+name,pan,number,address,email,photo
+
+
+post / signup
+ accept name,email,password,mobile,pan
+ post /login
+ accept  username
+ return id name of the user
+
