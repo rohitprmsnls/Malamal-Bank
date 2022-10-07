@@ -24,7 +24,7 @@
     position: relative;
     width: 350.5px;
     height: 350.5px;
-    animation: mymove 5s infinite;
+    animation: mymove 3s infinite;
     margin: 0 auto;
   }
   @keyframes mymove {
@@ -43,6 +43,7 @@
     max-width: 18rem;
     margin-top: -2rem;
     opacity: 0;
+    user-select: none;
   }
 
   p {
@@ -56,6 +57,7 @@
     text-align: left;
     margin-left: 2rem;
     opacity: 0;
+    user-select: none;
   }
 
   .btn1 {
