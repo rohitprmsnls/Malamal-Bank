@@ -18,12 +18,12 @@ const Landing = () => {
         <div className={s.content}>
           <h3>Jump start your crypto portfolio</h3>
           <p>Take your investment portfolio to next level</p>
-          {/* <Link href="/"> */}
+          <Link href="/details">
           <div className={s.btn}>New Account</div>
-          {/* </Link> */}
-          {/* <Link href="/"> */}
+          </Link>
+          <Link href="/existing">
           <div className={s.btn1}>Existing Account</div>
-          {/* </Link> */}
+          </Link>
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import s from "./Login.module.scss";
 import { Button, Form, Input } from "antd";
-import { useRecoilState } from "recoil";
+import Link from "next/link";
+
 // import { bookingAtom } from "src/_state";
 const Login = () => {
   return (
@@ -34,7 +35,9 @@ const Login = () => {
               className={`${s.input_data}`}
             />
           </Form.Item>
-          <Button type="primary">Log In</Button>
+          <Link href="/home">
+            <Button type="primary">Log In</Button>
+          </Link>
         </Form>
       </div>
     </div>
