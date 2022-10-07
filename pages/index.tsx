@@ -1,4 +1,6 @@
 import { Footer, Header } from "@components/common";
+import Homepage from "@components/Homepage";
+import Lapndingpage from "@components/Lapndingpage";
 import { AppConstant } from "constant/AppConstant";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -11,8 +13,10 @@ const Home: NextPage = () => {
         <title>{AppConstant.meta.title}</title>
         <meta name="description" content={AppConstant.meta.description} />
       </Head>
-      <Header />
-      <Footer />
+      {/* <Header />
+      <Footer /> */}
+      <Homepage/>
+      {/* <Lapndingpage /> */}
     </Layout>
   );
 };
