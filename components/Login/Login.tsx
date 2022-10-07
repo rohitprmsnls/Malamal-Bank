@@ -30,7 +30,7 @@ const Login = () => {
             ]}
           >
             <Input
-              placeholder=" Enter your 10 digit pin here"
+              placeholder=" Enter your 4 digit pin here"
               className={`${s.input_data}`}
             />
           </Form.Item>
