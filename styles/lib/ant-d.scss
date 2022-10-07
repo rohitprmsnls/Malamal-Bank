@@ -366,3 +366,13 @@
     }
   }
 }
+.ant-btn-primary {
+  background-color: transparent;
+  border-color: #39ff14;
+  color: #39ff14;
+}
+.ant-btn-primary:hover {
+  background-color: #39ff14;
+  color: #000;
+  border: none;
+}
