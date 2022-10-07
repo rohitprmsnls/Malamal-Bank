@@ -5,7 +5,7 @@ import { AppConstant } from "constant/AppConstant";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
-
+import Login from "@components/Login";
 const Home: NextPage = () => {
   return (
     <Layout className="page-home">
@@ -17,6 +17,7 @@ const Home: NextPage = () => {
       <Footer /> */}
       <Homepage/>
       {/* <Lapndingpage /> */}
+      <Login/>
     </Layout>
   );
 };
