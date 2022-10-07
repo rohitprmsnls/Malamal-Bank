@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
+import Link from "next/link";
+
 const { TextArea } = Input;
 const Details = () => {
   return (
@@ -76,7 +78,9 @@ const Details = () => {
             placeholder="Your address"
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
-          <Button type="primary">Submit</Button>
+          <Link href="/home">
+            <Button type="primary">Submit</Button>
+          </Link>
         </Form>
       </div>
     </div>
