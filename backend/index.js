@@ -1,7 +1,6 @@
 // // Importing express module
 const express = require('express');
-const connection = require('./storage/db')
-
+const connection = require('./storage/db');
 
 const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 3000;
@@ -14,17 +13,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('malamal bank');
 });
-
-// for signup
-app.post('/signup', async (req, res) => {
-  const findUser = await User.find({ email: req.body.email });
-  if (findUser.length) return res.send('User already exist');
-  const user = new User(req.body);
-  user.save();
-  res.status(201).send('Signup success');
-});
-
-// // For login
+ // For login
 app.post('/login', async (req, res) => {
   if (!User.length) return res.status(404).send('Wrong credential entered');
   const token = jwt.sign(
@@ -41,6 +30,17 @@ app.post('/login', async (req, res) => {
   });
 });
 
+// for signup
+app.post('/signup', async (req, res) => {
+  const findUser = await User.find({ email: req.body.email });
+  if (findUser.length) return res.send('User already exist');
+  const user = new User(req.body);
+  user.save();
+  res.status(201).send('Signup success');
+});
+
+// get user
+// b
 // //logout
 // app.post("/logout", async (req, res) => {
 //   try {
