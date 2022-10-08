@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3000;
 const User = require('./modules/User');
 
 const nodemailer = require('nodemailer');
-
 const app = express();
 
 app.use(express.json());
@@ -40,7 +39,7 @@ let mailTransporter = nodemailer.createTransport({
     pass: 'karu@842003',
   },
   tls:{
-    rejectUnauthorized:false,
+    rejectUnauthorized:false
   }
 });
   const acoountnumber = Math.floor(Math.random() * 10000000000)
@@ -66,8 +65,8 @@ mailDetails = {
   from: 'karinakhairnar@gmail.com',
   to: 'dipak943mali@gmail.com',
   subject: 'Test mail',
-  accountNumber: acoountnumber,
-  accountPin: pinnumber,
+  Text:"gmail. sent",
+ 
 };
 mailTransporter.sendMail(mailDetails, function(err, data) {
   if(err) {
