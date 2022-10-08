@@ -1,10 +1,12 @@
-// // Importing express module
+ // Importing express module
 const express = require('express');
 const connection = require('./storage/db');
 
 const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 3000;
 const User = require('./modules/User');
+
+const nodemailer = require('nodemailer');
 
 const app = express();
 
@@ -13,13 +15,13 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('malamal bank');
 });
- // For login
+// For login
 app.post('/login', async (req, res) => {
   if (!User.length) return res.status(404).send('Wrong credential entered');
   const token = jwt.sign(
     {
-      email: User.email,
-      password: User.password,
+      accountNumber: User.email,
+      accountPin: User.password,
     },
     'SECRET'
   );
@@ -31,14 +33,50 @@ app.post('/login', async (req, res) => {
 });
 
 // for signup
+let mailTransporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'karinakhairnar@gmail.com',
+    pass: 'karu@842003',
+  },
+  tls:{
+    rejectUnauthorized:false,
+  }
+});
+  const acoountnumber = Math.floor(Math.random() * 10000000000)
+  const pinnumber = Math.floor(Math.random() * 10000)
+  // let mailDetails;
+
 app.post('/signup', async (req, res) => {
   const findUser = await User.find({ email: req.body.email });
   if (findUser.length) return res.send('User already exist');
   const user = new User(req.body);
   user.save();
-  res.status(201).send('Signup success');
+  // return res.status(201).send('Signup success');
+  if (res.status(201)) {
+    return res.send({
+      message: 'Signup success',
+      User,
+      accountNumber: acoountnumber,
+      accountPin: pinnumber,
+    });
+  }
 });
-
+mailDetails = {
+  from: 'karinakhairnar@gmail.com',
+  to: 'dipak943mali@gmail.com',
+  subject: 'Test mail',
+  accountNumber: acoountnumber,
+  accountPin: pinnumber,
+};
+mailTransporter.sendMail(mailDetails, function(err, data) {
+  if(err) {
+      console.log('Error Occurs');
+  } else
+   {
+      console.log('Email sent successfully');
+  }
+});
 // get user
 // b
 // //logout
@@ -59,6 +97,32 @@ app.post('/signup', async (req, res) => {
 //   }
 // });
 
+
+// async function main() {
+//   let testAccount = await nodemailer.createTestAccount();
+
+//   let transporter = nodemailer.createTransport({
+//     host: "karinakhairnar@gmail.com",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: testAccount.user,
+//       pass: testAccount.pass,
+//     },
+//   });
+//   let info = await transporter.sendMail({
+//     from: 'karinakhairnar@gmail.com', // sender address
+//     to: "karinakhairnar@gmail.com", // list of receivers
+//     subject: "Hello ✔", // Subject line
+//     text: "Hello world?", // plain text body
+//     html: "<b>Hello world?</b>", // html body
+//   });
+
+//   // console.log("Message sent: %s", info.messageId);
+//   // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+// }
+
+// main().catch(console.error);
 app.listen(PORT, async () => {
   try {
     await connection;
