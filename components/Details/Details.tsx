@@ -78,7 +78,7 @@ const Details = () => {
             placeholder="Your address"
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
-          <Link href="/home">
+          <Link href="/existing">
             <Button type="primary">Submit</Button>
           </Link>
         </Form>

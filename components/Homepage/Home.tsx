@@ -8,11 +8,7 @@ const HomePage = () => {
     <div className={s.container}>
       <div className={s.profile}>
         <div className={s.imagewrapper}>
-          <Image
-            src="/images/logo.png"
-            alt="Picture of the "
-            layout="fill"
-          />
+          <Image src="/images/logo.png" alt="Picture of the " layout="fill" />
         </div>
         <div className={s.logout}>
           <span>log out</span>
@@ -27,15 +23,6 @@ const HomePage = () => {
         <div className={s.textwrap}>
           <div className={s.price}>
             <h1>$87,430.12</h1>
-          </div>
-          <div className={s.percent}>
-            <div className={s.arrow}>
-              <Image
-                src="/images/icons/arrowup.svg"
-                alt="Picture of the "
-                layout="fill"
-              />
-            </div>
           </div>
         </div>
         <div className={s.btns}>
