@@ -1,29 +1,9 @@
 // // Importing express module
 const express = require('express');
-const authRouter = require('./routes/auth');
 const connection = require('./storage/db')
-// const app = express();
-// // app.use(express.urlencoded({extended:true}));
-// app.use(express.json());
 
-// app.get('/', (req, res) => {
-//   res.send('malamal bank');
-// });
-// app.use('/auth',authRouter);
 
-// app.listen(8080, async() => {
-//     await connection;
-//     console.log("connected with db")
-//   console.log('Our express server is up on port http://localhost:8080');
-// });
-
-// const express = require('express');
-// const cors = require('cors');
-// const connection = require('./db');
 const jwt = require('jsonwebtoken');
-// const StudentModel = require('./models/StudnetModel');
-// const TestModel = require('./models/TestModel');
-// app.use(cors());
 const PORT = process.env.PORT || 3000;
 const User = require('./modules/User');
 
@@ -60,6 +40,24 @@ app.post('/login', async (req, res) => {
     token: token,
   });
 });
+
+// //logout
+// app.post("/logout", async (req, res) => {
+//   try {
+//     const { token } = req.headers;
+//     const user = await User.findOne({ token: token });
+//     console.log(user, token);
+//     if (user) {
+//       user.tokens = [];
+//       await user.save();
+//       res.status(200).json({ message: "logout successfully" });
+//     } else {
+//       res.status(400).json({ error: "invalid token" });
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 app.listen(PORT, async () => {
   try {
