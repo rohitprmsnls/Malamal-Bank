@@ -8,7 +8,7 @@ authRouter.post('/signup',(req,res)=>{
             return res.status(500).send({message:'Error'})
         }
         else{
-            return res.status(201).send({message:'succefull',token:'12345'})
+            return res.status(201).send({message:'succefull',token:''})
         }
     })
 });
