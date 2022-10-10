@@ -1,17 +1,39 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
 import Link from "next/link";
-
+import axios from "axios";
 const { TextArea } = Input;
 const Details = () => {
+  const handlesignup = () => {
+    axios
+      .post("http://localhost:3000/signup", {
+      //  name,phone,email,
+
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.message) {
+         
+          localStorage.setItem("user", JSON.stringify(res.data.userLogin));
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          //setState(false);
+        }
+      })
+      .catch((err) => {
+        
+       alert(err.response.data.error.toUpperCase());
+      
+      });
+  };
   return (
     <div className={`${s.container}`}>
       <div className={`${s.form}`}>
         <h1>Enter Details Here</h1>
         <Form>
           <Form.Item
-            name="name"
+            name="name" 
             rules={[
               {
                 required: true,
@@ -44,7 +66,7 @@ const Details = () => {
           >
             <Input placeholder="Email id" className={`${s.input_data}`} />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             name="password"
             rules={[
               {
@@ -53,8 +75,8 @@ const Details = () => {
                 type: "number",
               },
             ]}
-          >
-            <Input
+          > */}
+            {/* <Input
               placeholder=" Enter Password"
               className={`${s.input_data}`}
             />
@@ -68,18 +90,18 @@ const Details = () => {
                 type: "number",
               },
             ]}
-          >
-            <Input
+          > */}
+            {/* <Input
               placeholder="Re enter password"
               className={`${s.input_data}`}
             />
-          </Form.Item>
+          </Form.Item> */}
           <TextArea
             placeholder="Your address"
             autoSize={{ minRows: 2, maxRows: 6 }}
           />
           <Link href="/existing">
-            <Button type="primary">Submit</Button>
+            <Button type="primary" onClick={handlesignup}>Submit</Button>
           </Link>
         </Form>
       </div>

@@ -10,7 +10,7 @@
   "dependencies": {
     "@momentum-ui/react": "^23.27.4",
     "antd": "^4.18.3",
-    "axios": "^0.25.0",
+    "axios": "^1.1.2",
     "bootstrap": "^5.2.0-beta1",
     "gsap": "^3.9.1",
     "moment": "^2.29.3",

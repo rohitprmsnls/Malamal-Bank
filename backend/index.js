@@ -15,9 +15,9 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('malamal bank');
-});
+// app.get('/', (req, res) => {
+//   res.send('malamal bank');
+// });
 // For login
 app.post('/login', async (req, res) => {
   if (!User.length) return res.status(404).send('Wrong credential entered');
@@ -34,6 +34,7 @@ app.post('/login', async (req, res) => {
     token: token,
   });
 });
+
 
 // for signup
 let mailTransporter = nodemailer.createTransport({
@@ -77,13 +78,18 @@ mailDetails = {
   subject: 'Test mail',
   Text: 'gmail sent',
 };
-mailTransporter.sendMail(mailDetails, function (err, data) {
-  if (err) {
-    console.log(err,"error occur");
-  } else {
-    console.log('Email sent successfully');
-  }
-});
+
+app.get("/", async (req, res) => {
+  const userData = await User.find({data:req.body.name})
+  res.send(userData)
+})
+// mailTransporter.sendMail(mailDetails, function (err, data) {
+//   if (err) {
+//     console.log(err,"error occur");
+//   } else {
+//     console.log('Email sent successfully');
+//   }
+// });
 // get user
 // b
 // //logout
