@@ -79,7 +79,7 @@ mailDetails = {
 };
 mailTransporter.sendMail(mailDetails, function (err, data) {
   if (err) {
-    console.log(err);
+    console.log(err,"error occur");
   } else {
     console.log('Email sent successfully');
   }
