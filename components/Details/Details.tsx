@@ -8,9 +8,8 @@ const { TextArea } = Input;
 const Details = () => {
   const handlesignup = () => {
     axios
-      .post("http://localhost:3000/signup", {
-      //  name,phone,email,
-
+      .get("http://localhost:3000", {
+      //  name,phone,email,git 
       })
       .then((res) => {
         console.log(res);

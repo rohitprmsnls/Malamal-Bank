@@ -4,10 +4,10 @@ const connection = require('./storage/db');
 require('dotenv').config();
 const email = process.env.EMAIL;
 const password = process.env.PASSWORD;
-console.log(email, password);
+// console.log(email, password);
 
 const jwt = require('jsonwebtoken');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const User = require('./modules/User');
 
 const nodemailer = require('nodemailer');
@@ -20,7 +20,8 @@ app.use(express.json());
 // });
 // For login
 app.post('/login', async (req, res) => {
-  if (!User.length) return res.status(404).send('Wrong credential entered');
+  const findUser = await User.find({ acoountnumber: req.body.acoountnumber  });
+  if (!findUser.length) return res.status(404).send('Wrong credential entered');
   const token = jwt.sign(
     {
       accountNumber: User.acoountnumber,
@@ -35,62 +36,56 @@ app.post('/login', async (req, res) => {
   });
 });
 
-
 // for signup
-let mailTransporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
-  host: 'smtp.ethereal.email',
-  port: 587,
-  secure: false,
   auth: {
-    type: 'EAUTH',
-    user: 'karinakhairnar@gmail.com',
+    user: email,
     pass: password,
-    code: 'EAUTH',
-    command: 'AUTH PLAIN',
   },
-  // tls:{
-  //   rejectUnauthorized:false
-  // }
 });
-const acoountnumber = Math.floor(Math.random() * 10000000000);
-const pinnumber = Math.floor(Math.random() * 10000);
-// let mailDetails;
+
 
 app.post('/signup', async (req, res) => {
   const findUser = await User.find({ email: req.body.email });
   if (findUser.length) return res.send('User already exist');
-  const user = new User(req.body);
+  const acountNumber = Math.floor(Math.random() * 10000000000);
+  const pinnumber = Math.floor(Math.random() * 10000);
+  const user = new User({ ...req.body, acountNumber });
+
   user.save();
+  // let mailDetails;
+const mailOptions = {
+  from: email,
+  to: 'karinakhairnar@gmail.com',
+  subject: 'asch',
+  text: `User Information Account_Number :- ${acountNumber}, Pin :- ${pinnumber}`,
+  accountNumber:`${acountNumber}`,
+  account_Pin:`${pinnumber}`
+  // accountNumber: 'acoountnumber',
+  // accountPin: 'pinnumber',
+};
   // return res.status(201).send('Signup success');
   if (res.status(201)) {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) console.log(error);
+      else console.log('Email sent: ' + info.response);
+    });
     return res.send({
       message: 'Signup success',
       User,
-      accountNumber: acoountnumber,
-      accountPin: pinnumber,
+      acountNumber,
+       pinnumber,
     });
   }
 });
-mailDetails = {
-  from: 'karinakhairnar@gmail.com',
-  to: 'dipak943mali@gmail.com',
-  subject: 'Test mail',
-  Text: 'gmail sent',
-};
 
-app.get("/", async (req, res) => {
-  const userData = await User.find({data:req.body.name})
-  res.send(userData)
-})
-// mailTransporter.sendMail(mailDetails, function (err, data) {
-//   if (err) {
-//     console.log(err,"error occur");
-//   } else {
-//     console.log('Email sent successfully');
-//   }
-// });
-// get user
+// geting spesific user
+app.get('/', async (req, res) => {
+  const userData = await User.find({ data: req.body.email });
+  res.send(userData);
+});
+
 // b
 // //logout
 // app.post("/logout", async (req, res) => {
@@ -139,7 +134,7 @@ app.listen(PORT, async () => {
   try {
     await connection;
     console.log('Application connected to database');
-    console.log('App is running on http://localhost:3000');
+    console.log('App is running on http://localhost:8080');
   } catch {
     console.log('Connection failed');
   }
