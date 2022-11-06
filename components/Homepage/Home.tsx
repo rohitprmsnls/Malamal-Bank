@@ -2,21 +2,38 @@ import React from "react";
 import s from "./Home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "firebase/auth";
+import { auth } from "@config/firebase";
+import { dataAtom } from "@components/atom";
+import { useRecoilState } from "recoil";
 
 const HomePage = () => {
+  const [data, setdata] = useRecoilState(dataAtom);
+
+  const logout = async () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+      console.log(auth.currentUser)
+  };
+
   return (
     <div className={s.container}>
       <div className={s.profile}>
         <div className={s.imagewrapper}>
           <Image src="/images/logo.png" alt="Picture of the " layout="fill" />
         </div>
-        <div className={s.logout}>
+        <div className={s.logout} onClick={logout}>
           <span>log out</span>
         </div>
       </div>
       <h1>
-        {" "}
-        <span>Hello</span>Customer
+        <span>Hello</span>
+        {data?.name}
       </h1>
       <div className={s.balance}>
         <h3>Current Balance</h3>

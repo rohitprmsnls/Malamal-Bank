@@ -1,6 +1,3 @@
-import { Details } from '@components/Details';
-import { Login } from '@components/Login';
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
@@ -18,6 +15,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const auth = getAuth(Details)
-export const auth2 = getAuth(Login)
+export const auth = getAuth(app)
  

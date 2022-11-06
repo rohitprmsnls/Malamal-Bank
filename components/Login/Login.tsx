@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./Login.module.scss";
 import { Button, Form, Input } from "antd";
 import Link from "next/link";
-import { auth2 } from "@config/firebase";
+import { auth } from "@config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 // import { bookingAtom } from "src/_state";
@@ -13,7 +13,7 @@ const Login = () => {
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
-        auth2,
+        auth,
         loginEmail,
         loginPassword
       );
@@ -64,7 +64,7 @@ const Login = () => {
           </Form.Item>
           <Link href="/home">
             <Button type="primary" onClick={login}>
-              {auth2.currentUser}
+              sike
             </Button>
           </Link>
         </Form>
