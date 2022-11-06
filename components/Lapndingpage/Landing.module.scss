@@ -24,15 +24,18 @@
     position: relative;
     width: 350.5px;
     height: 350.5px;
-    animation: mymove 3s infinite;
+    animation: mymove 5s infinite;
     margin: 0 auto;
   }
   @keyframes mymove {
-    from {
+    0% {
       transform: translateY(0rem);
     }
-    to {
+    50% {
       transform: translateY(6rem);
+    }
+    100% {
+      transform: translateY(0rem);
     }
   }
 

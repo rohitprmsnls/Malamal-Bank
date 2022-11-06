@@ -159,3 +159,12 @@
     font-size: 1rem;
   }
 }
+
+.btnReg {
+  border-radius: 0.9375rem;
+  &:hover {
+    background: #39ff14;
+    color: black;
+    border: none;
+  }
+}
