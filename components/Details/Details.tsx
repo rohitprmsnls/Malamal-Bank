@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@config/firebase";
 import { useRouter } from "next/router";
+import { useAuth } from "context/AuthContext";
 
 // import Link from "next/link";
 // import axios from "axios";
@@ -21,21 +22,19 @@ const Details = () => {
 
   const router = useRouter();
 
+
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const User = await createUserWithEmailAndPassword(
         auth,
         regisitorEmail,
         regisitorPassword
       );
-      console.log(user);
+      // console.log(user);
     } catch (error: any) {
       console.log(error.message);
       router.push("/home");
     }
-    // updateProfile(auth?.currentUser, {
-    //   displayName: "User",
-    // })
   };
 
   const logout = async () => {};
