@@ -5,10 +5,12 @@ import s from "./Details.module.scss";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@config/firebase";
+import { useRouter } from "next/router";
 
 // import Link from "next/link";
 // import axios from "axios";
@@ -16,6 +18,8 @@ const { TextArea } = Input;
 const Details = () => {
   const [regisitorEmail, setRegisitorEmail] = useState("");
   const [regisitorPassword, setRegisitorPassword] = useState("");
+
+  const router = useRouter();
 
   const register = async () => {
     try {
@@ -27,30 +31,12 @@ const Details = () => {
       console.log(user);
     } catch (error: any) {
       console.log(error.message);
+      router.push("/home");
     }
     // updateProfile(auth?.currentUser, {
     //   displayName: "User",
     // })
   };
-
-
-
-  // const resetPass = () => {
-  //   const user = auth.currentUser;
-  //   const newPassword = getASecureRandomPassword();
-  
-  //   updatePassword(user, newPassword)
-  //     .then(() => {
-  //       // Update successful.
-  //     })
-  //     .catch((error) => {
-  //       // An error ocurred
-  //       // ...
-  //     });
-
-  // }
-
-
 
   const logout = async () => {};
 
@@ -111,9 +97,12 @@ const Details = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button onClick={register}
-            className='btnReg'
-            >Registor</Button>
+            <Button onClick={register} className="btnReg">
+              Register
+            </Button>
+            {/* <Button onClick={resetPass} className="btnReg">
+              auth
+            </Button> */}
           </Form.Item>
         </Form>
       </div>

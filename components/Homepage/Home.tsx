@@ -2,24 +2,44 @@ import React from "react";
 import s from "./Home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { signOut } from "firebase/auth";
+import { sendEmailVerification, signOut } from "firebase/auth";
 import { auth } from "@config/firebase";
 import { dataAtom } from "@components/atom";
 import { useRecoilState } from "recoil";
+import { useRouter } from "next/router";
+// import { profile } from "console";
 
 const HomePage = () => {
   const [data, setdata] = useRecoilState(dataAtom);
 
+  const router = useRouter()
+
   const logout = async () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        alert("signOut")
       })
-      .catch((error) => {
+      .catch((_error) => {
         // An error happened.
       });
-      console.log(auth.currentUser)
+    console.log(auth.currentUser);
+    router.back()
   };
+
+  // const auther = () => {
+  //   sendEmailVerification(auth.currentUser).then(() => {
+
+  //   });
+  // };
+
+  // const verify = async () => {
+  //   const user = auth.currentUser
+  //   sendEmailVerification(user).then(() => {
+  //     // Email verification sent!
+  //     // ...
+  //     console.log(user)
+  //   });
+  // };
 
   return (
     <div className={s.container}>
@@ -33,7 +53,7 @@ const HomePage = () => {
       </div>
       <h1>
         <span>Hello</span>
-        {data?.name}
+        <h1></h1>
       </h1>
       <div className={s.balance}>
         <h3>Current Balance</h3>
@@ -47,7 +67,7 @@ const HomePage = () => {
             <span>Deposit</span>
           </div>
           <div className={`${s.btn1} ${s.btn2}`}>
-            <span>Withdraw</span>
+            <span>verify</span>
           </div>
         </div>
       </div>

@@ -4,11 +4,14 @@ import { Button, Form, Input } from "antd";
 import Link from "next/link";
 import { auth } from "@config/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
 
 // import { bookingAtom } from "src/_state";
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  const router = useRouter();
 
   const login = async () => {
     try {
@@ -21,6 +24,8 @@ const Login = () => {
     } catch (error: any) {
       console.log(error.message);
     }
+    // router.push("/home");
+    signInSuccsessUrl: "/home";
   };
 
   return (
@@ -55,18 +60,18 @@ const Login = () => {
             ]}
           >
             <Input
-              placeholder=" Enter your 4 digit pin here"
+              placeholder=" Enter your pin here"
               className={`${s.input_data}`}
               onChange={(e: any) => {
                 setLoginPassword(e.target.value);
               }}
             />
           </Form.Item>
-          <Link href="/home">
-            <Button type="primary" onClick={login}>
-              sike
-            </Button>
-          </Link>
+          {/* <Link href="/home"> */}
+          <Button type="primary" className="btnReg" onClick={login}>
+            Log In
+          </Button>
+          {/* </Link> */}
         </Form>
       </div>
     </div>
