@@ -2,40 +2,27 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  updatePassword,
-  updateProfile,
-} from "firebase/auth";
-import { auth } from "@config/firebase";
+import { useAuth } from "context/AuthContext";
 
-// import Link from "next/link";
-// import axios from "axios";
-const { TextArea } = Input;
+
 const Details = () => {
-  const [regisitorEmail, setRegisitorEmail] = useState("");
-  const [regisitorPassword, setRegisitorPassword] = useState("");
+  const { user, signup } = useAuth();
+  console.log(user);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const register = async () => {
+  const handleSignup = async (e: any) => {
+    e.preventDefault();
+
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        regisitorEmail,
-        regisitorPassword
-      );
-      console.log(user);
-    } catch (error: any) {
-      console.log(error.message);
+      await signup(data.email, data.password);
+    } catch (err) {
+      console.log(err);
     }
-  };
 
-
-  const updateEmail = (e: any) => {
-    setRegisitorEmail(e.target.value);
-  };
-  const updatePassword = (e: any) => {
-    setRegisitorPassword(e.target.value);
+    console.log(data);
   };
 
   return (
@@ -64,10 +51,17 @@ const Details = () => {
             ]}
           >
             <Input
-              placeholder="Email"
               className={`${s.input_data}`}
               type="email"
-              onChange={updateEmail}
+              placeholder="Enter email"
+              required
+              onChange={(e: any) =>
+                setData({
+                  ...data,
+                  email: e.target.value,
+                })
+              }
+              value={data.email}
             />
           </Form.Item>
           <Form.Item
@@ -80,13 +74,20 @@ const Details = () => {
             ]}
           >
             <Input
-              placeholder="password"
-              className={`${s.input_data}`}
-              onChange={updatePassword}
+              type="password"
+              placeholder="Password"
+              required
+              onChange={(e: any) =>
+                setData({
+                  ...data,
+                  password: e.target.value,
+                })
+              }
+              value={data.password}
             />
           </Form.Item>
           <Form.Item>
-            <Button onClick={register} className="btnReg">
+            <Button onClick={handleSignup} className="btnReg">
               Registor
             </Button>
           </Form.Item>

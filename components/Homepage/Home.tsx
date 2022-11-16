@@ -1,45 +1,12 @@
 import React from "react";
 import s from "./Home.module.scss";
 import Image from "next/image";
-import Link from "next/link";
-import { sendEmailVerification, signOut } from "firebase/auth";
-import { auth } from "@config/firebase";
-import { dataAtom } from "@components/atom";
-import { useRecoilState } from "recoil";
+import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
-// import { profile } from "console";
 
 const HomePage = () => {
-  const [data, setdata] = useRecoilState(dataAtom);
-
-  const router = useRouter()
-
-  const logout = async () => {
-    signOut(auth)
-      .then(() => {
-        alert("signOut")
-      })
-      .catch((_error) => {
-        // An error happened.
-      });
-    console.log(auth.currentUser);
-    router.back()
-  };
-
-  // const auther = () => {
-  //   sendEmailVerification(auth.currentUser).then(() => {
-
-  //   });
-  // };
-
-  // const verify = async () => {
-  //   const user = auth.currentUser
-  //   sendEmailVerification(user).then(() => {
-  //     // Email verification sent!
-  //     // ...
-  //     console.log(user)
-  //   });
-  // };
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
   return (
     <div className={s.container}>
@@ -47,7 +14,13 @@ const HomePage = () => {
         <div className={s.imagewrapper}>
           <Image src="/images/logo.png" alt="Picture of the " layout="fill" />
         </div>
-        <div className={s.logout} onClick={logout}>
+        <div
+          className={s.logout}
+          onClick={() => {
+            logout();
+            router.push("/");
+          }}
+        >
           <span>log out</span>
         </div>
       </div>
@@ -67,7 +40,7 @@ const HomePage = () => {
             <span>Deposit</span>
           </div>
           <div className={`${s.btn1} ${s.btn2}`}>
-            <span>verify</span>
+            <span>Withdraw</span>
           </div>
         </div>
       </div>

@@ -6,9 +6,10 @@ import "nprogress/nprogress.css";
 import "../styles/theme.scss";
 import type { AppProps } from "next/app";
 import NProgress from "nprogress";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { RecoilRoot } from "recoil";
 import { AuthContextProvider } from "context/AuthContext";
+import ProtectedRoute from "@components/ProtectedRoute";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // const router = useRouter();
@@ -20,11 +21,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     NProgress.done();
   });
 
+  const router = useRouter();
+
+  const noAuthReq = ["/", "/existing", "/details"];
+
   return (
     <>
       <RecoilRoot>
         <AuthContextProvider>
-          <Component {...pageProps} />
+          {noAuthReq.includes(router.pathname) ? (
+            <Component {...pageProps} />
+          ) : (
+            <ProtectedRoute>
+              <Component {...pageProps} />
+            </ProtectedRoute>
+          )}
         </AuthContextProvider>
       </RecoilRoot>
     </>
