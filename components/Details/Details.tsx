@@ -5,13 +5,10 @@ import s from "./Details.module.scss";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  sendEmailVerification,
   updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { auth } from "@config/firebase";
-import { useRouter } from "next/router";
-import { useAuth } from "context/AuthContext";
 
 // import Link from "next/link";
 // import axios from "axios";
@@ -20,28 +17,25 @@ const Details = () => {
   const [regisitorEmail, setRegisitorEmail] = useState("");
   const [regisitorPassword, setRegisitorPassword] = useState("");
 
-  const router = useRouter();
-
-
   const register = async () => {
     try {
-      const User = await createUserWithEmailAndPassword(
+      const user = await createUserWithEmailAndPassword(
         auth,
         regisitorEmail,
         regisitorPassword
       );
-      // console.log(user);
+      console.log(user);
     } catch (error: any) {
       console.log(error.message);
-      router.push("/home");
     }
   };
 
-  const logout = async () => {};
 
-  const update = (e: any) => {
-    e = e.target.value;
-    console.log(Input);
+  const updateEmail = (e: any) => {
+    setRegisitorEmail(e.target.value);
+  };
+  const updatePassword = (e: any) => {
+    setRegisitorPassword(e.target.value);
   };
 
   return (
@@ -73,9 +67,7 @@ const Details = () => {
               placeholder="Email"
               className={`${s.input_data}`}
               type="email"
-              onChange={(e: any) => {
-                setRegisitorEmail(e.target.value);
-              }}
+              onChange={updateEmail}
             />
           </Form.Item>
           <Form.Item
@@ -90,18 +82,13 @@ const Details = () => {
             <Input
               placeholder="password"
               className={`${s.input_data}`}
-              onChange={(e: any) => {
-                setRegisitorPassword(e.target.value);
-              }}
+              onChange={updatePassword}
             />
           </Form.Item>
           <Form.Item>
             <Button onClick={register} className="btnReg">
-              Register
+              Registor
             </Button>
-            {/* <Button onClick={resetPass} className="btnReg">
-              auth
-            </Button> */}
           </Form.Item>
         </Form>
       </div>
