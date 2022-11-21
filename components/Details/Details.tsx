@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
 import { useAuth } from "context/AuthContext";
-
+import { useRouter } from "next/router";
 
 const Details = () => {
   const { user, signup } = useAuth();
@@ -11,13 +11,16 @@ const Details = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
+    displayName: "",
   });
+  const router = useRouter();
 
   const handleSignup = async (e: any) => {
     e.preventDefault();
 
     try {
       await signup(data.email, data.password);
+      router.push("/home");
     } catch (err) {
       console.log(err);
     }
@@ -34,12 +37,23 @@ const Details = () => {
             name="name"
             rules={[
               {
-                required: false,
+                required: true,
                 message: "Enter your name",
               },
             ]}
           >
-            <Input placeholder="NAME" className={`${s.input_data}`} />
+            <Input
+              placeholder="NAME"
+              type="input"
+              className={`${s.input_data}`}
+              onChange={(e: any) =>
+                setData({
+                  ...data,
+                  displayName: e.target.value,
+                })
+              }
+              value={data.displayName}
+            />
           </Form.Item>
           <Form.Item
             name="email"

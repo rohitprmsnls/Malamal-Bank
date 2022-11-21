@@ -5,12 +5,14 @@
   display: block;
   align-items: center;
   // text-align: center;
-  h1 {
+  .name {
     color: white;
     margin: 2rem 0 0 1.3rem;
-    span {
+    .hello {
       color: #39ff14;
       margin-right: 0.5rem;
+    }
+    .email {
     }
   }
 
@@ -20,10 +22,11 @@
     align-items: center;
     margin: 2rem 1rem 0 1rem;
     width: 100%;
-    max-width: 23rem;
+    max-width: 90%;
 
     .logout {
-        color: red;
+      color: red;
+      cursor: pointer;
     }
   }
   .imagewrapper {
@@ -95,6 +98,7 @@
       background: #39ff14;
       color: black;
       border-radius: 16px;
+      cursor: pointer;
     }
 
     .btn2 {
@@ -103,6 +107,7 @@
       color: #39ff14;
       margin-left: 1rem;
       margin-right: 2rem;
+      cursor: pointer;
     }
   }
 
@@ -122,6 +127,7 @@
       span {
         margin-right: 1rem;
         text-decoration: dashed;
+        cursor: pointer;
         &:hover {
           color: #39ff14;
         }

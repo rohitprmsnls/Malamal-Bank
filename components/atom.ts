@@ -7,7 +7,7 @@ import { atom } from "recoil";
 // }
 
 interface dataInterface {
-  name?: string;
+  displayName?: string;
   mobile?: string;
 }
 

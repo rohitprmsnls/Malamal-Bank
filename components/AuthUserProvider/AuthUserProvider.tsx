@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Firebase from "./Firebase";
 
-const formatAuthUser = (user: { uid: any; email: any }) => ({
+const formatAuthUser = (user: { uid: any; email: any; displayName: any }) => ({
   uid: user.uid,
   email: user.email,
+  displayName: user.displayName,
 });
 
 export default function useFirebaseAuth() {

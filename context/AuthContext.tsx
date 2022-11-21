@@ -4,9 +4,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { useRouter } from "next/router";
 
 
 const AuthContext = createContext<any>({});
@@ -47,14 +48,20 @@ export const AuthContextProvider = ({
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  const verify = async () => {
+    return sendEmailVerification(user)
+  }
+
   const logout = async () => {
     setUser(null);
     await signOut(auth);
     console.log(user);
   };
 
+  
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, verify }}>
       {loading ? null : children}
     </AuthContext.Provider>
   );
