@@ -2,10 +2,10 @@ import { dataAtom, show } from "@components/atom";
 import { Form, Input, Button } from "antd";
 import React from "react";
 import { useRecoilState } from "recoil";
-import s from "./Withdraw.module.scss";
+import s from "../Withdraw/Withdraw.module.scss";
 
-const Withdraw: React.FC = () => {
-  const [withdraw, setWithdraw] = useRecoilState(show);
+const Deposit: React.FC = () => {
+  const [deposit, setDeposit] = useRecoilState(show);
   const [data, setData] = useRecoilState(dataAtom);
 
 
@@ -15,8 +15,8 @@ const Withdraw: React.FC = () => {
       <div className={s.container}>
         <div className={s.wrapper}>
           <div className={s.title}>
-            <h1>Withdraw</h1>
-            <h3 onClick={() => setWithdraw(!withdraw)}>X</h3>
+            <h1>Deposit</h1>
+            <h3 onClick={() => setDeposit(!Deposit)}>X</h3>
           </div>
           <div className={s.form}>
             <Form>
@@ -45,9 +45,9 @@ const Withdraw: React.FC = () => {
               <Button
                 type="primary"
                 className="btnReg"
-                onClick={() => setWithdraw(!withdraw)}
+                onClick={() => setDeposit(!Deposit)}
               >
-                Withdraw
+                Deposit
               </Button>
             </Form>
           </div>
@@ -57,4 +57,4 @@ const Withdraw: React.FC = () => {
   );
 };
 
-export default Withdraw;
+export default Deposit;

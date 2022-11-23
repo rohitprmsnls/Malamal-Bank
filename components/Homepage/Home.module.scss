@@ -53,6 +53,9 @@
     h3 {
       font-size: 20px;
     }
+    .price {
+      font-size: 0.7rem;
+    }
 
     .textwrap {
       display: flex;
@@ -160,4 +163,12 @@
       }
     }
   }
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }

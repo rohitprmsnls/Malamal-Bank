@@ -1,0 +1,98 @@
+@import "/styles/variables.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+
+  .wrapper {
+    background: black;
+    width: 80%;
+    max-width: 25rem;
+    border: 1px solid green;
+    padding: 1rem;
+    .title {
+      h1 {
+        color: #ffffff;
+      }
+      h3 {
+        color: #ffffff;
+        cursor: pointer;
+      }
+      display: flex;
+      justify-content: space-between;
+    }
+    .form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input {
+        height: 3.9375rem;
+        width: 100%;
+        max-width: 532px;
+
+        background: #ffffff;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border: none;
+        border-radius: 0.9375rem;
+        // margin: 1rem 0rem;
+
+        @media screen and (max-width: $mobileResolution) {
+          height: 3.9375rem;
+          width: 20.625rem;
+
+          background: #ffffff;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+          border: none;
+          // border-radius: 0.9375rem;
+          // margin: 1.9375rem 0rem;
+        }
+        &::placeholder {
+          color: #000 !important;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 1rem;
+          opacity: 0.2 !important;
+        }
+      }
+      .btn {
+        height: 3.25rem;
+        width: 20.625rem;
+
+        background: #ffffff;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        color: #000;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        border: none;
+        margin: 10rem 0px 0rem 0rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media screen and (max-width: $mobileResolution) {
+          height: 3.25rem;
+          width: 20.625rem;
+
+          background: #ffffff;
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+          border-radius: 20px;
+          color: #000;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 30px;
+          border: none;
+          margin: 4.4375rem 0rem 2rem 0rem;
+        }
+      }
+    }
+  }
+}

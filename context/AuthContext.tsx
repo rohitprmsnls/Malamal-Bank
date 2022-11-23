@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendEmailVerification,
-  updateProfile,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
 
@@ -49,7 +48,9 @@ export const AuthContextProvider = ({
   };
 
   const verify = async () => {
-    return sendEmailVerification(user)
+    setUser(null);
+    await sendEmailVerification(auth);
+    console.log(user);
   }
 
   const logout = async () => {
