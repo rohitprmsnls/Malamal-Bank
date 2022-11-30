@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import s from "./Details.module.scss";
 import { useAuth } from "context/AuthContext";
+import { getDatabase, ref, set } from "firebase/database";
+
 import { useRouter } from "next/router";
+import { db } from "@config/firebase";
 
 const Details = () => {
   const { user, signup } = useAuth();
@@ -19,14 +22,22 @@ const Details = () => {
     e.preventDefault();
 
     try {
-      await signup(data.email, data.password);
+      await signup(data.email, data.password, data.displayName);
       router.push("/home");
     } catch (err) {
       console.log(err);
     }
 
     console.log(data);
+    
+  function writeUserData(userId: string, name: any, imageUrl: any) {
+    set(ref(db, "users/" + userId), {
+      username: data.displayName,
+      profile_picture: imageUrl,
+    });
+  }
   };
+
 
   return (
     <div className={`${s.container}`}>
